@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addSubview(self.customView)
+        view.addSubview(customView)
         
         
         
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     private lazy var customView: CustomView = {
         
         let customView = CustomView()
-        customView.frame = self.view.bounds
+        customView.frame = view.bounds
         return customView
     }()
 }

@@ -33,13 +33,13 @@ class CollectionLayout: UICollectionViewFlowLayout {
     override func prepareLayout() {
         super.prepareLayout()
         
-        for index in 0...self.colCount-1 {
-            self.maxYDict[String(index)] = "0" // 用来存放最大Y列的字典赋值
+        for index in 0...colCount-1 {
+            maxYDict[String(index)] = "0" // 用来存放最大Y列的字典赋值
         }
         
-        let count = (self.collectionView?.numberOfItemsInSection(0))! as Int
+        let count = (collectionView?.numberOfItemsInSection(0))! as Int
         for index in 0...count-1 {
-            let attributes = self.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0))
+            let attributes = layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0))
             attributesArray.append(attributes!)
         }
     }
@@ -54,26 +54,26 @@ class CollectionLayout: UICollectionViewFlowLayout {
         print("layoutAttributesForItemAtIndexPath\(indexPath.row)")
         var minCol = "0"
         // 找出最短的列
-        for (col, maxY) in self.maxYDict {
-            if maxY.floatValue < self.maxYDict[minCol]?.floatValue {
+        for (col, maxY) in maxYDict {
+            if maxY.floatValue < maxYDict[minCol]?.floatValue {
                 minCol = col // 如果有比第1列短的，更新最短列标记值
             }
         }
         
         // 计算每个layout的结构信息
-        let totalW = (self.collectionView?.frame.size.width)! - self.secInset.left - self.secInset.right - CGFloat(self.colCount - 1) * self.colMargin
+        let totalW = (collectionView?.frame.size.width)! - secInset.left - secInset.right - CGFloat(colCount - 1) * colMargin
         
-        let width = totalW / CGFloat(self.colCount)
+        let width = totalW / CGFloat(colCount)
         var height: CGFloat = 0.0
-        height = (self.delegate?.collectionViewLayoutHeight(self, atIndexPath: indexPath))!
-        let x = self.secInset.left + (width + self.colMargin) * CGFloat((minCol as NSString).floatValue)
-        let y = CGFloat(self.maxYDict[minCol]!.floatValue) + self.rowMargin
+        height = (delegate?.collectionViewLayoutHeight(self, atIndexPath: indexPath))!
+        let x = secInset.left + (width + colMargin) * CGFloat((minCol as NSString).floatValue)
+        let y = CGFloat(maxYDict[minCol]!.floatValue) + rowMargin
         
         
         print("minCol:\(minCol) :  \(x) \(y) \(width) \(height)")
         
         // 更新存放最短列的字典
-        self.maxYDict[minCol] = String(y + height)
+        maxYDict[minCol] = String(y + height)
         
         // 赋值并返回
         let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
@@ -86,13 +86,13 @@ class CollectionLayout: UICollectionViewFlowLayout {
     // 计算并返回collectionView的容器大小
     override func collectionViewContentSize() -> CGSize {
         var maxCol = "0"
-        for(col, maxY) in self.maxYDict {
-            if maxY.floatValue > self.maxYDict[maxCol]?.floatValue {
+        for(col, maxY) in maxYDict {
+            if maxY.floatValue > maxYDict[maxCol]?.floatValue {
                 maxCol = col
             }
         }
-        if self.maxYDict.count > 0 {
-            return CGSize(width: 0, height: CGFloat((self.maxYDict[maxCol]!.floatValue)!))
+        if maxYDict.count > 0 {
+            return CGSize(width: 0, height: CGFloat((maxYDict[maxCol]!.floatValue)!))
         }
         return CGSizeZero
     }
@@ -102,7 +102,7 @@ class CustomView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(self.collectionV)
+        addSubview(collectionV)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -111,7 +111,7 @@ class CustomView: UIView {
     // MARK : 布局
     override func layoutSubviews() {
         super.layoutSubviews()
-        collectionV.frame = self.bounds
+        collectionV.frame = bounds
     }
     
     // MARK: 懒加载collectionView

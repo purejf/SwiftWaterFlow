@@ -20,8 +20,8 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.imageView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height - 20)
-        self.bottomLabel.frame = CGRect(x: 0, y: self.frame.size.height - 20, width: self.frame.size.width, height: 20)
+        imageView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height - 20)
+        bottomLabel.frame = CGRect(x: 0, y: frame.size.height - 20, width: frame.size.width, height: 20)
     }
     
     private lazy var imageView: UIImageView = {
