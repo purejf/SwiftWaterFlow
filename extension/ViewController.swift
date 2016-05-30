@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     private lazy var customView: CustomView = {
         
         let customView = CustomView()
-        customView.frame = view.bounds
+        customView.frame = self.view.bounds
         return customView
     }()
 }

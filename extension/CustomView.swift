@@ -24,7 +24,7 @@ class CollectionLayout: UICollectionViewFlowLayout {
     
     var colMargin: CGFloat = 10.0 // 列间距 minimumInteritemSpacing
     
-    var colCount: Int = 0
+    var colCount: Int = 1
     
     var secInset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     
