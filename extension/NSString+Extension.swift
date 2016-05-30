@@ -7,3 +7,22 @@
 //
 
 import Foundation
+
+
+extension NSString {
+    
+    func Timming() -> String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
+    
+    func deleteString(str: String) -> String {
+        
+        if self.rangeOfString(str).location != NSNotFound {
+            let mutableStr = self.mutableCopy()
+            mutableStr.deleteCharactersInRange(self.rangeOfString(str))
+            return mutableStr as! String
+        }
+        return self as String
+    }
+    
+}
